@@ -22,14 +22,19 @@ class TodoApplication {
 
     addTodo(text: string) {
         const id = this.todos.length;
-        const todo: ITodo = {id, text, is_completed: true};
+        const todo: ITodo = {id, text, is_completed: false};
         this.todos.push(todo);
-        localStorage.setItem("todos", JSON.stringify(this.todos));
+        this.updateLocal();
     }
 
     getTodoAsListUI(todo: ITodo): HTMLLIElement {
         const li = document.createElement('li');
+        const wrapperSpan = document.createElement('span');
+        wrapperSpan.classList.add('left');
         const textSpan = document.createElement('span');
+        if(todo.is_completed) {
+            textSpan.classList.add('strike');
+        }
         textSpan.textContent = todo.text;
 
         const checkbox = document.createElement('input');
@@ -46,8 +51,10 @@ class TodoApplication {
         })
 
         const deleteButton = document.createElement('button');
-        deleteButton.setAttribute('id', `d-${todo.id}`)
-        deleteButton.textContent = 'x';
+        deleteButton.classList.add("delete-button");
+        deleteButton.classList.add("btn");
+        deleteButton.classList.add("btn-danger");
+        deleteButton.innerHTML = '<i class="bi bi-trash3"></i>';
         deleteButton.addEventListener('click', () => {
             for (let i = this.todos.length - 1; i >= 0; i--) {
                 if (this.todos[i].id === todo.id) {
@@ -57,8 +64,9 @@ class TodoApplication {
             }
         })
 
-        li.appendChild(checkbox);
-        li.appendChild(textSpan);
+        wrapperSpan.appendChild(checkbox);
+        wrapperSpan.appendChild(textSpan);
+        li.appendChild(wrapperSpan);
         li.appendChild(deleteButton);
 
         return li;
@@ -85,7 +93,7 @@ const main = () => {
     // initialize application
     const app = new TodoApplication(ul);
 
-    // render ui
+    // initial render
     app.render();
 
     // form submit event
@@ -96,7 +104,6 @@ const main = () => {
         if(todoText !== '' && todoText !== null && todoText !== undefined) {
             console.log(`todoText: "${todoText}"`);
             app.addTodo(todoText);
-            app.render();
             todoInput.value = '';
         }
     });

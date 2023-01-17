@@ -5,13 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo!</title>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="./styles/global.css" />
   </head>
   <body>
     <main>
       <form id="todo-input-form">
-        <input type="text" id="todo-input-text" />
-        <button type="submit">Add</button>
+        <input type="text" id="todo-input-text" autofocus />
+        <button type="submit" class="add-button">
+          <i class="bi bi-plus-lg btn btn-success"></i>
+        </button>
       </form>
       <ul id="todo-list"></ul>
     </main>
