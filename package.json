@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node build/scripts/server.js",
+    "start": "node_modules/typescript/bin/tsc || node build/scripts/server.js",
     "watch": "node_modules/typescript/bin/tsc --watch",
     "test": "npx playwright test --project=chromium"
   },
