@@ -26,6 +26,7 @@ class TodoApplication {
     const todo: ITodo = { id, text, is_completed: false };
     this.todos.push(todo);
     this.currentId += 1;
+    localStorage.setItem("todos", JSON.stringify(this.todos));
     this._addTodoInUI(todo);
   }
 
